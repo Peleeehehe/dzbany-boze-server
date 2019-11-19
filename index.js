@@ -2,7 +2,7 @@ const io = require('socket.io')();
 
 io.on('connection', (client) => {
     client.on('send-message', (data) => {
-        io.emit('new-message', data);
+        client.emit('new-message', data);
     });
 });
 

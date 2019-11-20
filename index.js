@@ -1,8 +1,12 @@
 const io = require('socket.io')();
 
 io.on('connection', (client) => {
-    client.on('send-message', (data) => {
-        client.emit('new-message', data);
+    client.on('new-message-from-client', ({ message, id }) => {
+        const messageObject = {
+            message,
+            id
+        };
+        client.broadcast.emit('new-message-from-server', messageObject);
     });
 });
 
